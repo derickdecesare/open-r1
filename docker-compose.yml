@@ -1,0 +1,15 @@
+version: "3"
+services:
+  open-r1:
+    build: .
+    volumes:
+      - .:/workspace/open-r1 # Mount current directory to container
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    # Keep container running
+    command: tail -f /dev/null
